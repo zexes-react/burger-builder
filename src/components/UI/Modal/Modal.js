@@ -7,7 +7,7 @@ class Modal extends Component {
     //remember if i intend that all properties should be checked, use PureComponent directly
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
-        return nextProps.show !== this.props.show;
+        return nextProps.show !== this.props.show || nextProps.children !== this.props.children;
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
