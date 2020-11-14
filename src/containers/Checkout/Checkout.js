@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
+import { Route } from 'react-router-dom';
+
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
+import ContactData from "./ContactData/ContactData";
 
 class Checkout extends Component {
     state ={
@@ -28,14 +31,18 @@ class Checkout extends Component {
     }
 
     render() {
+        const CONTACT_DATA = '/contact-data';
         return (
             <div>
                 <CheckoutSummary ingredients={this.state.ingredients}
                     checkoutCancelled={this.checkoutCancelledHandler}
-                    checkoutContinued={this.checkoutContinuedHandler}/>
+                    checkoutContinued={this.checkoutContinuedHandler} />
+                <Route path={this.props.match.path + CONTACT_DATA} component={ContactData}/>
             </div>
         );
     }
+
+    //remember Checkout was defined as a route hence has access to the location, match, history
 
 }
 
