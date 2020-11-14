@@ -6,21 +6,23 @@ import ContactData from "./ContactData/ContactData";
 
 class Checkout extends Component {
     state ={
-        ingredients: {
-            salad: 1,
-            meat: 1,
-            cheese: 1,
-            bacon: 1
-        }
+        ingredients: null,
+        totalPrice: 0
     }
 
-    componentDidMount() {
+    componentWillMount() {
         const query = new URLSearchParams(this.props.location.search);
         const ingredients = {};
+        let price = 0
         for(let param of query.entries()){
-            ingredients[param[0]] = +param[1]  //preceding plus converts to number
+            if(param[0] === 'price'){
+                price = param[1];
+            }else{
+                ingredients[param[0]] = +param[1]  //preceding plus converts to number
+            }
+
         }
-        this.setState({ ingredients: ingredients})
+        this.setState({ ingredients: ingredients, totalPrice: price})
     }
 
     checkoutCancelledHandler = () => {
@@ -37,7 +39,18 @@ class Checkout extends Component {
                 <CheckoutSummary ingredients={this.state.ingredients}
                     checkoutCancelled={this.checkoutCancelledHandler}
                     checkoutContinued={this.checkoutContinuedHandler} />
+                <Route path={this.props.match.path + CONTACT_DATA}
+                       render={(props) => (
+                           <ContactData
+                               ingredient={this.state.ingredients}
+                               price={this.state.totalPrice}
+                               {...props} //we could have used withRouter instead of this
+                           />
+                           )}/>
+                {/*
+                 we are using the above as opposed to this so that we can pass data around
                 <Route path={this.props.match.path + CONTACT_DATA} component={ContactData}/>
+                */}
             </div>
         );
     }
