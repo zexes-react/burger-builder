@@ -20,7 +20,7 @@ const order = (props) => {
                      margin: '0 8px',
                      border: 'ipx solid #ccc',
                      padding: '5px'}}>
-            amount {ig.name} {ig.amount}
+            {ig.name} {ig.amount}
         </span>
     });
     return (
