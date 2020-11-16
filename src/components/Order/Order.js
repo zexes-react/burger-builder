@@ -15,12 +15,15 @@ const order = (props) => {
 
     const ingredientsOutput = ingredients.map(ig => {
         return <span key={ig.name}
+                     // className={classes.OrderOutput}
                      style={{textTransform: 'capitalize',
-                     display: 'inline-block',
-                     margin: '0 8px',
-                     border: 'ipx solid #ccc',
-                     padding: '5px'}}>
-            {ig.name} {ig.amount}
+                         display: 'inline-block',
+                         margin: '0 8px',
+                         border: '1px solid #ccc',
+                         padding: '5px',
+                         boxShadow: '0 2px 3px #ccc',
+                         boxSizing: 'border-box'}}>
+             {ig.name} ({ig.amount})
         </span>
     });
     return (
@@ -32,3 +35,4 @@ const order = (props) => {
 };
 
 export default order;
+
