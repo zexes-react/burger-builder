@@ -6,6 +6,7 @@ import classes from './Button.module.css';
 //note we are  setting btnType somewhere else i.e in OrderSummary
 const button = (props) => (
     <button
+        disabled={props.disabled}
         className={[classes.Button, classes[props.btnType]].join(' ')}
         onClick={props.clicked}>
         {props.children}
